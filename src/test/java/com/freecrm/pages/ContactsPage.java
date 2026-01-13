@@ -85,7 +85,7 @@ public class ContactsPage extends BasePage {
         saveBtn.click();
 
         WaitUtils waitUtils = new WaitUtils(driver);
-        waitUtils.waitForElementClickable(invoicesTab);
+        waitUtils.waitForElementClickability(invoicesTab);
         invoicesTab.click();
     }
 
@@ -93,7 +93,7 @@ public class ContactsPage extends BasePage {
         driver.findElement(By.xpath("//button[@class='ui button icon' and ./ ancestor::tr//a[text()='" + name + "']]"))
                 .click();
         WaitUtils waitUtils = new WaitUtils(driver);
-        waitUtils.waitForElementClickable(popUpDeleteBtnl);
+        waitUtils.waitForElementClickability(popUpDeleteBtnl);
         popUpDeleteBtnl.click();
 
     }

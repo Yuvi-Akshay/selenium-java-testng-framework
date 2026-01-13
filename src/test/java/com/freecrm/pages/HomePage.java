@@ -47,14 +47,14 @@ public class HomePage extends BasePage {
         // WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         // wait.until(ExpectedConditions.elementToBeClickable(contactLink));
         WaitUtils waitUtils = new WaitUtils(driver);
-        waitUtils.waitForElementClickable(contactLink);
+        waitUtils.waitForElementClickability(contactLink);
         contactLink.click();
         return new ContactsPage(driver);
     }
 
     public DealsPage goToDeals() {
         WaitUtils waitUtils = new WaitUtils(driver);
-        waitUtils.waitForElementClickable(dealsLink);
+        waitUtils.waitForElementClickability(dealsLink);
         dealsLink.click();
         return new DealsPage(driver);
     }
