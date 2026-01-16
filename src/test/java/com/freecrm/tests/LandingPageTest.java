@@ -25,8 +25,8 @@ public class LandingPageTest extends BaseTestPublic {
         LandingPage landingPage = new LandingPage(driver);
         LoginPage loginPage = landingPage.clickOnLoginBtn();
         Dotenv dotenv = Dotenv.load();
-        String userName = dotenv.get("username");
-        String password = dotenv.get("password");
+        String userName = dotenv.get("FREECRM_USERNAME");
+        String password = dotenv.get("FREECRM_PASSWORD");
         HomePage homePage = loginPage.login(userName, password);
         String title = homePage.getHomePageTitle();
         Assert.assertTrue(title.contains("Free CRM"), "Home page title is incorrect");

@@ -8,32 +8,33 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class DriverFactory {
+    private static ThreadLocal<WebDriver> tlDriver = new ThreadLocal<>();
 
-    public WebDriver initDriver(String browser){
-        WebDriver driver= null;
+    public WebDriver initDriver(String browser) {
 
-        // if(browser == null){
-        //     browser = "chrome";
-        // }
+        if(browser == null){
+        browser = "chrome";
+        }
 
-        if(browser.equalsIgnoreCase("chrome")){
+        if (browser.equalsIgnoreCase("chrome")) {
             WebDriverManager.chromedriver().setup();
-            driver= new ChromeDriver();
-        }
-        else  if(browser.equalsIgnoreCase("edge")){
+            tlDriver.set(new ChromeDriver());
+            // driver = new ChromeDriver();
+        } else if (browser.equalsIgnoreCase("edge")) {
             WebDriverManager.edgedriver().setup();
-            driver= new EdgeDriver();
-        }
-         else  if(browser.equalsIgnoreCase("fireFox")){
+            tlDriver.set(new EdgeDriver());
+        } else if (browser.equalsIgnoreCase("fireFox")) {
             WebDriverManager.firefoxdriver().setup();
-            driver= new FirefoxDriver();
-        }
-        else {
+            tlDriver.set(new FirefoxDriver());
+        } else {
             throw new IllegalArgumentException("Unsupported browser: " + browser);
         }
 
-        return driver;
-        
+        return getDriver();
     }
-    
+
+    public static WebDriver getDriver() {
+        return tlDriver.get();
+    }
+
 }

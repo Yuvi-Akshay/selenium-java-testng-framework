@@ -12,7 +12,7 @@ import org.openqa.selenium.WebDriver;
 
 public class ScreenshotUtil {
 
-    public static String screenShort(WebDriver driver, String testName) {
+    public static String takeScreenShot(WebDriver driver, String testName) {
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMyyyy_HHmmss"));
         File screenshotDir = new File("./screenshot");
         if (!screenshotDir.exists()) {

@@ -23,11 +23,14 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//*[@class='ui mini basic icon button' and  ./ancestor:: *[@class='menu-item-wrapper' and .//*[text()='Contacts']]]")
     private WebElement addContactBtn;
 
-     @FindBy(xpath = "//*[@class='ui mini basic icon button' and  ./ancestor:: *[@class='menu-item-wrapper' and .//*[text()='Deals']]]")
+    @FindBy(xpath = "//*[@class='ui mini basic icon button' and  ./ancestor:: *[@class='menu-item-wrapper' and .//*[text()='Deals']]]")
     private WebElement addDealsBtn;
+
+    private WaitUtils waitUtils;
 
     public HomePage(WebDriver driver) {
         super(driver);
+        this.waitUtils= new WaitUtils(driver);
     }
 
     public String getHomePageTitle() {
@@ -35,25 +38,18 @@ public class HomePage extends BasePage {
     }
 
     public String getDisplayName() {
-        // WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        // wait.until(ExpectedConditions.visibilityOf(dispNameLabel));
 
-        WaitUtils waitUtils = new WaitUtils(driver);
         waitUtils.waitForElementVisibility(dispNameLabel);
         return dispNameLabel.getText();
     }
 
     public ContactsPage goToContacts() {
-        // WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        // wait.until(ExpectedConditions.elementToBeClickable(contactLink));
-        WaitUtils waitUtils = new WaitUtils(driver);
         waitUtils.waitForElementClickability(contactLink);
         contactLink.click();
         return new ContactsPage(driver);
     }
 
     public DealsPage goToDeals() {
-        WaitUtils waitUtils = new WaitUtils(driver);
         waitUtils.waitForElementClickability(dealsLink);
         dealsLink.click();
         return new DealsPage(driver);
@@ -62,14 +58,16 @@ public class HomePage extends BasePage {
     public ContactsPage clickOnAddNewContact() {
         Actions myActions = new Actions(driver);
         myActions.moveToElement(contactLink).build().perform();
-        addContactBtn.click();
+        waitUtils.waitForElementClickability(addContactBtn);
+        // addContactBtn.click();
         return new ContactsPage(driver);
     }
 
-     public DealsPage clickOnAddNewDeals() {
+    public DealsPage clickOnAddNewDeals() {
         Actions myActions = new Actions(driver);
-        myActions.moveToElement(contactLink).build().perform();
-        addContactBtn.click();
+        myActions.moveToElement(dealsLink).build().perform();
+        waitUtils.waitForElementClickability(addDealsBtn);
+        addDealsBtn.click();
         return new DealsPage(driver);
     }
 }

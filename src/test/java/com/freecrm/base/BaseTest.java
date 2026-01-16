@@ -38,16 +38,17 @@ public class BaseTest {
 
         LandingPage landingPage = new LandingPage(driver);
         LoginPage loginPage = landingPage.clickOnLoginBtn();
-        // homePage = loginPage.login(prop.getProperty("username"), prop.getProperty("password"));
+        // homePage = loginPage.login(prop.getProperty("username"),
+        // prop.getProperty("password"));
 
         // String userName = System.getenv("username");
         // String password = System.getenv("password");
         // System.out.println("Credentials loaded from environment");
         // homePage = loginPage.login(userName, password);
 
-        Dotenv dotenv = Dotenv.load();
-        String userName = dotenv.get("username");
-        String password = dotenv.get("password");
+        Dotenv dotenv = Dotenv.configure().directory(System.getProperty("user.dir")).ignoreIfMissing().load();
+        String userName = dotenv.get("FREECRM_USERNAME");
+        String password = dotenv.get("FREECRM_PASSWORD");
         homePage = loginPage.login(userName, password);
 
     }

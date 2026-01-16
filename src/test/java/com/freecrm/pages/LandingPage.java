@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import com.freecrm.base.BasePage;
+import com.freecrm.utils.WaitUtils;
 
 public class LandingPage extends BasePage {
 
@@ -26,11 +27,15 @@ public class LandingPage extends BasePage {
     }
 
     public LoginPage clickOnLoginBtn() {
+        WaitUtils waitUtils = new WaitUtils(driver);
+        waitUtils.waitForElementClickability(loginBtn);
         loginBtn.click();
         return new LoginPage(driver);
     }
 
     public boolean isPageHeaderVisible() {
+        WaitUtils waitUtils = new WaitUtils(driver);
+        waitUtils.waitForElementVisibility(pageHeader);
         return pageHeader.isDisplayed();
     }
 }
