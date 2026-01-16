@@ -59,7 +59,7 @@ public class HomePage extends BasePage {
         Actions myActions = new Actions(driver);
         myActions.moveToElement(contactLink).build().perform();
         waitUtils.waitForElementClickability(addContactBtn);
-        // addContactBtn.click();
+        addContactBtn.click();
         return new ContactsPage(driver);
     }
 

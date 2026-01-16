@@ -14,12 +14,12 @@ public class ScreenshotUtil {
 
     public static String takeScreenShot(WebDriver driver, String testName) {
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMyyyy_HHmmss"));
-        File screenshotDir = new File("./screenshot");
+        File screenshotDir = new File(System.getProperty("user.dir") + "/test-output/screenshots");
         if (!screenshotDir.exists()) {
             screenshotDir.mkdirs();
         }
 
-        String screenshotPath = "./screenshot/" + testName + "_" + timestamp + ".png";
+        String screenshotPath = System.getProperty("user.dir")+ "/test-output/screenshots/" + testName + "_" + timestamp + ".png";
         try {
             File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
             File dest = new File(screenshotPath);
@@ -27,7 +27,7 @@ public class ScreenshotUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return screenshotPath;
+        return "screenshots/" + testName + "_" + timestamp + ".png";
     }
 
 }

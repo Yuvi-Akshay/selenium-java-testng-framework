@@ -94,7 +94,7 @@ public class ContactsPage extends BasePage {
                 .click();
         WaitUtils waitUtils = new WaitUtils(driver);
         waitUtils.waitForElementClickability(popUpDeleteBtnl);
-        // popUpDeleteBtnl.click();
+        popUpDeleteBtnl.click();
 
     }
 

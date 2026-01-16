@@ -6,6 +6,7 @@ target/
 
 # TestNG & Surefire reports
 test-output/
+/screenshots/
 surefire-reports/
 
 # Logs
